@@ -2,6 +2,15 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Backend Training Frontend</h1>
 
-Welcome to your new app.
+Welcome to backend challenges! <br>
+
+<label>
+    Set your backend url:
+    <InputText @bind-Value="code" @oninput="@(e => Configs.Backend = e.Value?.ToString() ?? "")" />
+</label>
+
+@code {
+    string? code = Configs.Backend;
+}

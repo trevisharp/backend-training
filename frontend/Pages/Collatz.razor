@@ -1,0 +1,46 @@
+﻿@page "/collatz"
+
+<PageTitle>Challenge 1 - Collatz Conjecture</PageTitle>
+
+<h1>Collatz Conjecture</h1>
+
+<hr/>
+
+O frontend faz uma requisição para backend/collatz mandando um json com os <br>
+campos 'current' com o valor atual e 'step' com a quantidade de passos <br>
+esperados. Cada passo é a aplicação da função de collatz, ou seja, se 'step' <br>
+é 1, esperamos uma aplicação da funçaõ, se 'step' é 3, aplicamos 3 vezes a <br>
+função. A função collatz é: Se o número n for par, retornamos n / 2, caso <br>
+contrário, retornamos 3 * n + 1. A entrada da função é evidentemente o <br>
+'current'. <br>
+A requisição deve retornar o status code correto e uma mensagem de erro se <br>
+o 'step' ou 'current' forem negativos. Em caso de sucesso, a requisição deve <br>
+retornar um json com o campo 'new_current' com o novo valor de 'current'.
+
+<hr/>
+
+<p role="status">Current count: @current</p>
+<label>
+    Jump count:
+    <InputNumber @bind-Value="step" />
+</label>
+
+<hr/>
+
+<button class="btn btn-primary" @onclick="RandomNumber">Get a Random Number</button>
+<button class="btn btn-primary" @onclick="CollatzFunc">Apply Collatz Function</button>
+
+@code {
+    private int current = 9;
+    private int step = 1;
+
+    private void RandomNumber()
+    {
+        current = Random.Shared.Next() + 2;
+    }
+
+    private void CollatzFunc()
+    {
+        
+    }
+}
