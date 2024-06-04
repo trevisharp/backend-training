@@ -6,11 +6,26 @@
 
 <hr/>
 
-<table>
-    
-</table>
-
 <hr/>
+
+<table>
+
+    <tr>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+    </tr>
+
+    @foreach (var city in cities)
+    {
+        <tr>
+            <td> @city.name </td>
+            <td> @city.state </td>
+            <td> @city.country </td>
+        </tr>
+    }
+
+</table>
 
 
 
@@ -19,5 +34,8 @@
 <button class="btn btn-primary">Validate</button>
 
 @code {
+    record City(string name, string state, string country);
+    List<City> cities = new List<City>();
 
+    
 }
