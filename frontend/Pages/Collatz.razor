@@ -1,15 +1,19 @@
 ﻿@page "/collatz"
 
+@using System.Net
+
+@inject IJSRuntime js
+
 <PageTitle>Challenge 1 - Collatz Conjecture</PageTitle>
 
 <h1>Collatz Conjecture</h1>
 
 <hr/>
 
-O frontend faz uma requisição para backend/collatz mandando um json com os <br>
-campos 'current' com o valor atual e 'step' com a quantidade de passos <br>
-esperados. Cada passo é a aplicação da função de collatz, ou seja, se 'step' <br>
-é 1, esperamos uma aplicação da funçaõ, se 'step' é 3, aplicamos 3 vezes a <br>
+O frontend faz uma requisição para backend/collatz mandando os paraâmetros <br>
+'current' com o valor atual e 'step' com a quantidade de passos esperados.  <br>
+Cada passo é a aplicação da função de collatz, ou seja, se 'step é 1, ' <br>
+esperamos uma aplicação da funçaõ, se 'step' é 3, aplicamos 3 vezes a <br>
 função. A função collatz é: Se o número n for par, retornamos n / 2, caso <br>
 contrário, retornamos 3 * n + 1. A entrada da função é evidentemente o <br>
 'current'. <br>
@@ -36,11 +40,22 @@ retornar um json com o campo 'new_current' com o novo valor de 'current'.
 
     private void RandomNumber()
     {
-        current = Random.Shared.Next() + 2;
+        current = Random.Shared.Next(10_000) + 2;
     }
 
-    private void CollatzFunc()
+    private async void CollatzFunc()
     {
+        var response = await Configs.Client
+            .GetAsync($"/collatz?step={step}&current={current}");
         
+        if (response.StatusCode == HttpStatusCode.BadRequest) {
+            await js.InvokeVoidAsync("alert", "Step and current should be positive.");
+            return;
+        }
+
+        var obj = await response.Content.ReadFromJsonAsync<CollatzResult>();
+        current = obj.current;
     }
+
+    record CollatzResult(int current);
 }
