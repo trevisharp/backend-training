@@ -1,5 +1,9 @@
 @page "/curitiba"
 
+@using System.Net
+
+@inject IJSRuntime js
+
 <PageTitle>Challenge 2 - Curitiba Register</PageTitle>
 
 <h1>Curitiba Register</h1>
@@ -38,7 +42,14 @@ frontend.
     private string cep = "";
     private string cpf = "";
 
-    private void Validate()
+    private async void Validate()
     {
+        var response = await Configs.Client
+            .GetAsync($"/curitiba?cep={cep}&cpf={cpf}");
+        
+        var obj = await response.Content.ReadFromJsonAsync<RegisterResult>();
+        await js.InvokeVoidAsync("alert", obj.message);
     }
+
+    record RegisterResult(bool success, string message);
 }
