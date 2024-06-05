@@ -1,10 +1,12 @@
 @page "/cities"
 
-<PageTitle>Challenge 3 - Cities Index</PageTitle>
+<PageTitle>Challenge 5 - Cities Index</PageTitle>
 
 <h1>Cities Index</h1>
 
 <hr/>
+
+O Frontend manda uma requisição com um parâmetro string e 
 
 <hr/>
 
@@ -29,11 +31,20 @@
 
 <hr/>
 
-<button class="btn btn-primary">Validate</button>
+<label>
+    Search:
+    <InputText @bind-Value="search" />
+</label>
+
+<button class="btn btn-primary" @onclick="Search">Search</button>
 
 @code {
+    string search;
+    List<City> cities = [];
     record City(string name, string state, string country);
-    List<City> cities = new List<City>();
 
-    
+    private void Search()
+    {
+
+    }
 }

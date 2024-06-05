@@ -4,13 +4,13 @@
 
 @inject IJSRuntime js
 
-<PageTitle>Challenge 1 - Collatz Conjecture</PageTitle>
+<PageTitle>Challenge 3 - Collatz Conjecture</PageTitle>
 
 <h1>Collatz Conjecture</h1>
 
 <hr/>
 
-O frontend faz uma requisição para backend/collatz mandando os paraâmetros <br>
+O frontend faz uma requisição para backend/collatz mandando os parâmetros <br>
 'current' com o valor atual e 'step' com a quantidade de passos esperados.  <br>
 Cada passo é a aplicação da função de collatz, ou seja, se 'step é 1, ' <br>
 esperamos uma aplicação da funçaõ, se 'step' é 3, aplicamos 3 vezes a <br>
@@ -24,12 +24,15 @@ retornar um json com o campo 'new_current' com o novo valor de 'current'.
 <hr/>
 
 <p role="status">Current count: @current</p>
+
+<hr/>
+
 <label>
     Jump count:
     <InputNumber @bind-Value="step" />
 </label>
 
-<hr/>
+<br> <br>
 
 <button class="btn btn-primary" @onclick="RandomNumber">Get a Random Number</button>
 <button class="btn btn-primary" @onclick="CollatzFunc">Apply Collatz Function</button>

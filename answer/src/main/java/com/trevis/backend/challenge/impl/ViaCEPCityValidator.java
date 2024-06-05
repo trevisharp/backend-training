@@ -13,7 +13,7 @@ public class ViaCEPCityValidator implements CityValidator {
 
     @Override
     public boolean validate(String cep, String city) {
-        String url = "https://viacep.com.br/ws/" + cep + "/json/";
+        String url = "http://viacep.com.br/ws/" + cep + "/json";
         ViaCEPJson obj = rest.getForObject(url, ViaCEPJson.class);
         return obj.localidade() == city;
     }

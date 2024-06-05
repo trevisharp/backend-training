@@ -15,7 +15,6 @@ public static class Configs
     public static HttpClient Client {
         get
         {
-            Console.WriteLine(Backend);
             var http = new HttpClient {
                 BaseAddress = new Uri(Backend)
             };

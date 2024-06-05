@@ -1,14 +1,11 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Backend Training Frontend</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </div>
 </div>
 
-@* https://www.appstudio.dev/app/OpenIconic.html *@
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+
+<div class="nav-scrollable">
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -17,37 +14,37 @@
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="collatz">
+            <NavLink class="nav-link" href="reverse">
                 Challenge 1
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="curitiba">
+            <NavLink class="nav-link" href="collatz">
                 Challenge 2
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="cities">
+            <NavLink class="nav-link" href="collatz">
                 Challenge 3
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="">
+            <NavLink class="nav-link" href="collatz">
                 Challenge 4
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="">
+            <NavLink class="nav-link" href="curitiba">
                 Challenge 5
             </NavLink>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="">
+            <NavLink class="nav-link" href="cities">
                 Challenge 6
             </NavLink>
         </div>
@@ -57,16 +54,23 @@
                 Challenge 7
             </NavLink>
         </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="">
+                Challenge 8
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="">
+                Challenge 9
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="">
+                Challenge 10
+            </NavLink>
+        </div>
     </nav>
 </div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
