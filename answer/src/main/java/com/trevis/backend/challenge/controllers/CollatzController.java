@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.trevis.backend.challenge.models.CollatzResult;
-import com.trevis.backend.challenge.models.CollatzStep;
+import com.trevis.backend.challenge.dto.CollatzResult;
+import com.trevis.backend.challenge.dto.CollatzStep;
 import com.trevis.backend.challenge.services.CollatzFunction;
 
 @RestController

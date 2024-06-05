@@ -1,4 +1,6 @@
-package com.trevis.backend.challenge.services;
+package com.trevis.backend.challenge.impl;
+
+import com.trevis.backend.challenge.services.CollatzFunction;
 
 public class DefaultCollatzFunction implements CollatzFunction {
 
