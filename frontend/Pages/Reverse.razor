@@ -51,6 +51,7 @@ ou seja, é igual de traz pra frente.
         var obj = await response.Content.ReadFromJsonAsync<ReverseJson>();
         this.reverse = obj.result;
         this.palindrome = obj.palindrome;
+        StateHasChanged();
     }
 
     record ReverseJson(string result, bool palindrome);

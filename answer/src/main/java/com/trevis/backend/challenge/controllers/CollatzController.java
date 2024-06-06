@@ -17,9 +17,8 @@ public class CollatzController {
     @Autowired
     private CollatzFunction cz;
 
-	@GetMapping("/collatz/{banana}")
-	public CollatzResult collatz(String banana, CollatzStep step) {
-        System.out.println(banana);
+	@GetMapping("/collatz")
+	public CollatzResult collatz(CollatzStep step) {
         if (step.step() < 0 || step.current() < 0) {
             throw new ResponseStatusException(
                HttpStatus.BAD_REQUEST, "step and current should be positive."

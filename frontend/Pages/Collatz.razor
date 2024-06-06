@@ -58,6 +58,7 @@ retornar um json com o campo 'new_current' com o novo valor de 'current'.
 
         var obj = await response.Content.ReadFromJsonAsync<CollatzResult>();
         current = obj.current;
+        StateHasChanged();
     }
 
     record CollatzResult(int current);
