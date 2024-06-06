@@ -10,7 +10,7 @@
 
 <hr/>
 
-O frontend faz uma requisição para backend/collatz mandando os parâmetros <br>
+O frontend faz uma requisição para backend/collatz mandando um json com campos <br>
 'current' com o valor atual e 'step' com a quantidade de passos esperados.  <br>
 Cada passo é a aplicação da função de collatz, ou seja, se 'step é 1, ' <br>
 esperamos uma aplicação da funçaõ, se 'step' é 3, aplicamos 3 vezes a <br>
@@ -60,6 +60,6 @@ retornar um json com o campo 'new_current' com o novo valor de 'current'.
         current = obj.current;
         StateHasChanged();
     }
-
+    
     record CollatzResult(int current);
 }
