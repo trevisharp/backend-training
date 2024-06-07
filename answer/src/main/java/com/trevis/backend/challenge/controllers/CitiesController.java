@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.trevis.backend.challenge.model.City;
-import com.trevis.backend.challenge.services.CityRepository;
+import com.trevis.backend.challenge.services.SearchCityService;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class CitiesController {
 
     @Autowired
-    CityRepository repo;
+    SearchCityService repo;
 
-    @GetMapping("/cities")
-    public List<City> getMethodName(@PathVariable String query) {
+    @GetMapping("/cities/{query}")
+    public List<City> getSearch(@PathVariable String query) {
         if (query == null)
             throw new ResponseStatusException(
                HttpStatus.BAD_REQUEST, "The search query must be non-null."
@@ -28,5 +28,9 @@ public class CitiesController {
         
         return repo.search(query);
     }
-    
+
+    @GetMapping("/cities")
+    public List<City> getAll() {
+        return repo.search("");
+    }
 }

@@ -11,14 +11,22 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.context.annotation.Configuration;
 
 import com.trevis.backend.challenge.services.CPFValidator;
+import com.trevis.backend.challenge.services.SearchCityService;
 import com.trevis.backend.challenge.services.CityValidator;
 import com.trevis.backend.challenge.services.CollatzFunction;
 import com.trevis.backend.challenge.impl.DefaultCPFValidator;
 import com.trevis.backend.challenge.impl.ViaCEPCityValidator;
 import com.trevis.backend.challenge.impl.DefaultCollatzFunction;
+import com.trevis.backend.challenge.impl.JPASearchCityService;
 
 @Configuration
 public class DependenciesConfiguration {
+
+    @Bean
+    @Scope("singleton")
+    public SearchCityService cityRepository() {
+        return new JPASearchCityService();
+    }
     @Bean
     @Scope("singleton")
     public CollatzFunction collatzFunction() {

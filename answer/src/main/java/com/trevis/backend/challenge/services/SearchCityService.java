@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.trevis.backend.challenge.model.City;
 
-public interface CityRepository {
+public interface SearchCityService {
     List<City> search(String name);
 }
