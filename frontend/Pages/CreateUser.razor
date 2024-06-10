@@ -19,23 +19,24 @@ O retorno deve ser um objeto com uma mensagem simples chamado 'message'. <br>
 
 <hr/>
 
-<label>
-    Email:
-    <InputText @bind-Value="email" />
-</label>
-<br>
+<div class="styleform">
 
-<label>
-    Username:
-    <InputText @bind-Value="username" />
-</label>
-<br>
+    <div class="rightcolumn">
+    
+        <label>Email</label>
+        <label>Username</label>
+        <label>password</label>
+    
+    </div>
 
-<label>
-    password:
-    <InputText @bind-Value="password" />
-</label>
-<br>
+    <div class="leftcolumn">
+
+        <InputText @bind-Value="email" />
+        <InputText @bind-Value="username" />
+        <InputText @bind-Value="password" />
+    
+    </div>
+</div>
 
 <hr/>
 
