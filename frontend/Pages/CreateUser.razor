@@ -52,7 +52,7 @@ O retorno deve ser um objeto com uma mensagem simples chamado 'message'. <br>
         );
         
         if (response.StatusCode != HttpStatusCode.OK) {
-            await js.InvokeVoidAsync("alert", response.ReasonPhrase);
+            await js.InvokeVoidAsync("alert", response);
             return;
         }
 
