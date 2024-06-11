@@ -72,7 +72,7 @@ um Json.
         ));
         
         if (response.StatusCode == HttpStatusCode.BadRequest) {
-            await js.InvokeVoidAsync("alert", response.ReasonPhrase);
+            await js.InvokeVoidAsync("alert", await response.Content.ReadAsStringAsync());
             return;
         }
         
@@ -80,7 +80,7 @@ um Json.
             await js.InvokeVoidAsync("alert", $"erro desconhecido!\n\nstatus code: {(int)response.StatusCode}");
         }
         
-        var result = await response.Content.ReadFromJsonAsync<string>();
+        var result = await response.Content.ReadAsStringAsync();
         await js.InvokeVoidAsync("alert", result);
     }
 }

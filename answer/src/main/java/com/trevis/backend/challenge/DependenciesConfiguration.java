@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.trevis.backend.challenge.services.CPFValidator;
 import com.trevis.backend.challenge.services.SearchCityService;
@@ -25,9 +27,17 @@ import com.trevis.backend.challenge.impl.DefaultMailValidator;
 import com.trevis.backend.challenge.impl.DefaultPasswordValidator;
 import com.trevis.backend.challenge.impl.DefaultUserAuth;
 import com.trevis.backend.challenge.impl.JPASearchCityService;
+import com.trevis.backend.challenge.impl.SHAPasswordEncoder;
 
 @Configuration
 public class DependenciesConfiguration {
+
+    @Bean
+    @Scope("prototype")
+    public PasswordEncoder passwordEncoder() {
+        // return new BCryptPasswordEncoder(8);
+        return new SHAPasswordEncoder();
+    }
 
     @Bean
     @Scope("singleton")

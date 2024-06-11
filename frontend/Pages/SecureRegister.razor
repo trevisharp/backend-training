@@ -1,21 +1,30 @@
-@page "/create"
+@page "/secure"
 @using System.Net
 
 @inject IJSRuntime js
 
-<PageTitle>Challenge 6 - Create User Account</PageTitle>
+<PageTitle>Challenge 8 - Secure Register</PageTitle>
 
-<h1>Create User Account</h1>
+<h1>Secure Register</h1>
 
-O Frontend manda um json com dados de um usuário que está criando uma conta <br>
-no sistema. O usuário deve possuir os campos 'username', 'password' e 'email'. <br>
-O backend deve receber esses dados no Endpoint /create e retornar uma mensagem <br>
-de sucesso, ou, se o usuário/email já está em uso. Também deve retornar se a <br>
-senha atinge os seguintes parâmetros de segurança: Possuir ao menos 8 caracteres; <br>
-Ter letras maiusculas; Ter letras minusculas; Ter números. Nenhum campo pode ser
-vazio ou menor de 4 caracteres. Valide se o email tem format xxx@yyy <br>
-A requisição deve ser um POST. <br>
-O retorno deve ser uma string simples com a mensagem. <br>
+Os últimos 3 desafios estão intercorrelacionados então você precisará <br>
+resolver um em sequência do outro. <br>
+<br>
+
+Assim como o desafio 6, iremos cadastrar um usuário com email, username <br>
+e senha, antendendo todos os critérios da última etapa. Contudo, desta <br>
+vez, você deverá usar o bcrypt (slow hash) com salting para garantir um <br>
+bom armazenamento das senhas. A requisição de registro será essa: <br>
+<br>
+POST /user <br>
+{ <br>
+&emsp; "email" : value, <br>
+&emsp; "username" : value, <br>
+&emsp; "password" : value <br>
+} <br>
+<br>
+Evidentemente, você não precisará validar se a senha atende os parâmetros <br>
+de segurança.
 
 <hr/>
 
@@ -48,11 +57,11 @@ O retorno deve ser uma string simples com a mensagem. <br>
     async void Create()
     {
         var response = await Configs.Client.PostAsJsonAsync<UserData>(
-            $"/create", new UserData(username, password, email)
+            $"/user", new UserData(username, password, email)
         );
         
         if (response.StatusCode != HttpStatusCode.OK) {
-            await js.InvokeVoidAsync("alert", response);
+            await js.InvokeVoidAsync("alert", await response.Content.ReadAsStringAsync());
             return;
         }
         
