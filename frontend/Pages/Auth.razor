@@ -7,22 +7,19 @@
 
 <h1>Secure Authentification</h1>
 
-
 <hr/>
 
 <div class="styleform">
 
     <div class="rightcolumn">
     
-        <label>Email</label>
         <label>Username</label>
         <label>password</label>
     
     </div>
 
     <div class="leftcolumn">
-
-        <InputText @bind-Value="email" />
+        
         <InputText @bind-Value="username" />
         <InputText @bind-Value="password" />
     
@@ -31,15 +28,16 @@
 
 <hr/>
 
+<InputText @bind-Value="token" />
 <button class="btn btn-primary" @onclick="Create">Create Account</button>
 
 @code {
-    string username, password, email;
+    string username, password, token;
 
     async void Create()
     {
         var response = await Configs.Client.PostAsJsonAsync<UserData>(
-            $"/create", new UserData(username, password, email)
+            $"/create", new UserData(username, password, null)
         );
         
         if (response.StatusCode != HttpStatusCode.OK) {
