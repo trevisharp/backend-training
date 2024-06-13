@@ -16,7 +16,7 @@ public class SHAPasswordEncoder implements PasswordEncoder {
 
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        var parts = encodedPassword.split("$");
+        var parts = encodedPassword.split("\\$");
         var expected = encode(rawPassword.toString(), parts[1]);
         return encodedPassword.equals(expected);
     }
@@ -27,7 +27,7 @@ public class SHAPasswordEncoder implements PasswordEncoder {
         try
         {
             for (int i = 0; i < 1024; i++)
-            value = hash(value);
+                value = hash(value);
         }
         catch (Exception ex)
         {

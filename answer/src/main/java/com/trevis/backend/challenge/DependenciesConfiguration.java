@@ -14,29 +14,60 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.trevis.backend.challenge.services.CPFValidator;
 import com.trevis.backend.challenge.services.SearchCityService;
+import com.trevis.backend.challenge.services.SignatureService;
 import com.trevis.backend.challenge.services.UserAuth;
 import com.trevis.backend.challenge.services.CityValidator;
 import com.trevis.backend.challenge.services.CollatzFunction;
+import com.trevis.backend.challenge.services.HashService;
+import com.trevis.backend.challenge.services.JWTService;
+import com.trevis.backend.challenge.services.KeyService;
 import com.trevis.backend.challenge.services.MailValidator;
 import com.trevis.backend.challenge.services.PasswordValidator;
 
 import com.trevis.backend.challenge.impl.DefaultCPFValidator;
 import com.trevis.backend.challenge.impl.ViaCEPCityValidator;
 import com.trevis.backend.challenge.impl.DefaultCollatzFunction;
+import com.trevis.backend.challenge.impl.DefaultJWTService;
 import com.trevis.backend.challenge.impl.DefaultMailValidator;
 import com.trevis.backend.challenge.impl.DefaultPasswordValidator;
 import com.trevis.backend.challenge.impl.DefaultUserAuth;
 import com.trevis.backend.challenge.impl.JPASearchCityService;
-import com.trevis.backend.challenge.impl.SHAPasswordEncoder;
+import com.trevis.backend.challenge.impl.RS256SignatureService;
+import com.trevis.backend.challenge.impl.RSAKeyService;
+import com.trevis.backend.challenge.impl.SHA256HashService;
 
 @Configuration
 public class DependenciesConfiguration {
 
     @Bean
+    @Scope("singleton")
+    public <T> JWTService<T> jwtService() {
+        return new DefaultJWTService<>();
+    }
+
+    @Bean
+    @Scope("singleton")
+    public SignatureService signatureService() {
+        return new RS256SignatureService();
+    }
+    
+    @Bean
+    @Scope("singleton")
+    public KeyService keyService() {
+        return new RSAKeyService();
+    }
+
+    @Bean
+    @Scope("singleton")
+    public HashService hashService() {
+        return new SHA256HashService();
+    }
+
+    @Bean
     @Scope("prototype")
     public PasswordEncoder passwordEncoder() {
-        // return new BCryptPasswordEncoder(8);
-        return new SHAPasswordEncoder();
+        return new BCryptPasswordEncoder(8);
+        // return new SHAPasswordEncoder();
     }
 
     @Bean
