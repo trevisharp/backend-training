@@ -2,24 +2,21 @@ package com.trevis.backend.challenge.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trevis.backend.challenge.model.User;
+import com.trevis.backend.challenge.dto.LoginData;
 import com.trevis.backend.challenge.dto.AuthResult;
 import com.trevis.backend.challenge.dto.JWTUserData;
-import com.trevis.backend.challenge.dto.LoginData;
-import com.trevis.backend.challenge.model.User;
 import com.trevis.backend.challenge.services.UserAuth;
 import com.trevis.backend.challenge.services.JWTService;
 import com.trevis.backend.challenge.services.MailValidator;
-import com.trevis.backend.challenge.services.SignatureService;
 import com.trevis.backend.challenge.repositories.UserJPARepository;
 
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class SecureUserController {
