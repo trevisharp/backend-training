@@ -1,11 +1,8 @@
 package com.trevis.backend.challenge.impl;
 
-import java.nio.charset.StandardCharsets;
-import java.security.KeyPair;
 import java.util.Base64;
-
-import javax.crypto.Cipher;
-
+import java.security.KeyPair;
+import java.security.Signature;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.trevis.backend.challenge.services.HashService;
@@ -27,20 +24,34 @@ public class RS256SignatureService implements SignatureService {
         
         try
         {
-            Cipher cipher = Cipher.getInstance("RSA");
-            cipher.init(Cipher.ENCRYPT_MODE, pair.getPublic());
-            
-            var hash = hashService.hash(message);
-            var secretMessageBytes = hash.getBytes(StandardCharsets.UTF_8);
-            var encryptedMessageBytes = cipher.doFinal(secretMessageBytes);
-            var result = Base64.getEncoder().encodeToString(encryptedMessageBytes);
-            
-            return result;
+            Signature rsa = Signature.getInstance("SHA256withRSA");
+            rsa.initSign(pair.getPrivate());
+            rsa.update(hashService.hash(message));
+            byte[] sig = rsa.sign();
+            return Base64.getEncoder().encodeToString(sig);
         }
         catch (Exception ex)
         {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public boolean verify(String message, String signature) {
+        KeyPair pair = keyService.getKeys();
+        if (pair == null)
+            return false;
+        
+        try {
+            Signature sig = Signature.getInstance("SHA256withRSA");
+            sig.initVerify(pair.getPublic());
+            sig.update(hashService.hash(message));
+            byte[] signatureBytes = Base64.getDecoder().decode(signature);
+            return sig.verify(signatureBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
