@@ -27,9 +27,11 @@ public class DefaultJWTService<T> implements JWTService<T> {
                 .withDefaultPrettyPrinter();
             
             String json = ow.writeValueAsString(obj);
-            String base64Json = Base64.getEncoder().encodeToString(
-                json.getBytes(StandardCharsets.UTF_8)
-            );
+            String base64Json = Base64
+                .getEncoder()
+                .encodeToString(
+                    json.getBytes(StandardCharsets.UTF_8)
+                );
 
             String header = "{ \"alg\": \"RS256\", \"typ\": \"JWT\" }";
             String base64Header = Base64.getEncoder().encodeToString(

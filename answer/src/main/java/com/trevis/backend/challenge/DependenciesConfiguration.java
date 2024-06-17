@@ -64,7 +64,7 @@ public class DependenciesConfiguration {
     }
 
     @Bean
-    @Scope("prototype")
+    @Scope("singleton")
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);
         // return new SHAPasswordEncoder();

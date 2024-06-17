@@ -37,7 +37,8 @@ public class SecureUserController {
     JWTService<JWTUserData> jwt;
 
     @PostMapping("login")
-    public ResponseEntity<AuthResult> login(@RequestBody LoginData data) {
+    public ResponseEntity<AuthResult> login(
+        @RequestBody LoginData data) {
         var user = auth.loginByEmail(data.login());
         user = user != null ? user :
             auth.loginByUsername(data.login());
